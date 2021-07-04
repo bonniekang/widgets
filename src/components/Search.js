@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Search = () => {
     const [term, setTerm] = useState('');
 
     useEffect(() => {
-        console.log("useeffect");
-    }, [])
+        const search = async () => {
+            await axios.get('search');
+        }
+        /*(async () => {
+            await axios.get('search');
+        })();*/
+
+        /*axios.get('search')
+            .then((response) => {
+                console.log(response.data)
+            })*/
+    }, [term])
 
     return (
         <div>
