@@ -3,19 +3,26 @@ import axios from 'axios'
 
 const Convert = ({language, text}) => {
 
+    const [translated, setTranslated] = useState('')
+
     useEffect(() => {
-        axios.post('googletranslationapi', {}, {
-            params: {
-                q: text,
-                target: language.value,
-                key: 'api key'
-            }
-        })
+
+        const doTranslation = async () => {
+            const { data } = await axios.post('googletranslationapi', {}, {
+                params: {
+                    q: text,
+                    target: language.value,
+                    key: 'api key'
+                }
+            })
+            setTranslated(data.data.translations[0].translatedText)
+        }
+        doTranslation();
     }, [language, text]) 
 
     return (
         <div>
-
+            {translated}
         </div>
     )
 }
